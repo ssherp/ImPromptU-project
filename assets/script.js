@@ -1,3 +1,6 @@
+
+var map = L.map('map').setView([51.505, -0.09], 13);
+
 var requestUrl = 'http://api.open-notify.org/iss-now.json';
 
 fetch(requestUrl)
@@ -27,7 +30,7 @@ fetch(requestUrl)
             $(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss"));
         }, 1000);
 
-        cityLocation(latCord, lonCord);
+        // cityLocation(latCord, lonCord);
     });
         //  function cityLocation(lat, lon)
 
