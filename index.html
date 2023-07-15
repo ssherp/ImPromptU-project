@@ -70,20 +70,48 @@
       </div>
     </div>
   </main>
-  <script href="./assets/script.js"></script>
-
-
+  <section class="user-input">
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <p class="title">
+                Your Location
+              </p>
+              <div class="field">
+                <label class="label">Your City</label>
+                <div class="control">
+                  <input class="input" type="text" placeholder="Type city name here" id="user-city">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control">
+                  <button class="button is-link" id="submit">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <p class="title">
+                Distance
+              </p>
+              <p class="subtitle">
+                <span id="distance"></span> km
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <div id="map"></div>
-
-
-
-  
-  
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="./assets/script.js"></script>
-  
-
 </body>
 </html>
