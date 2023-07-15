@@ -16,6 +16,63 @@
     <div class="cords"></div>
   </header>
 
+  <main>
+    <article>
+      <p>Welcome to W.T.S where's the spaceship is an
+        interactive webpage where you can find the current
+        location of the international space station, you can
+        view the longitude and latitude real time and also
+        the corresponding location on the ground, in
+        addition to that you can see what time the sun will
+        rise and set. Check down below to input your
+        current location and see how far you are away from
+        the ISS’s current ground location</p>
+    </article>
+    <div id="map"></div>
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <p class="title">
+                ISS Location
+              </p>
+              <p class="subtitle">
+                <span id="lat"></span> <span id="lon"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <p class="title">
+                ISS Speed
+              </p>
+              <p class="subtitle">
+                <span id="speed"></span> km/h
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <p class="title">
+                ISS Altitude
+              </p>
+              <p class="subtitle">
+                <span id="altitude"></span> km
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script href="./assets/script.js"></script>
+
+
   <div id="map"></div>
 
 
@@ -27,5 +84,6 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="./assets/script.js"></script>
   
+
 </body>
 </html>
