@@ -1,6 +1,14 @@
 
+var map = L.map('map');
+map.setView([10, 10], 13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 
-var map = L.map('map').setView([51.505, -0.09], 13);
+
+
+}).addTo(map);
+var lmark = L.marker([10, 10]).addTo(map)
+
 
 var requestUrl = 'http://api.open-notify.org/iss-now.json';
 
