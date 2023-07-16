@@ -1,20 +1,26 @@
-
 var map = L.map('map').setView([0, 0], 3);
+
+var lmark;
+var myIcon = L.icon({
+        iconUrl: './assets/image/astronaut.png',
+        iconSize: [60, 60]
+        
+    });
+    
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 
-
+    
+    
 
 }).addTo(map);
+//var lmark = L.marker([10, 10],{icon:myIcon}).addTo(map)
 
-var myIcon = L.icon ({
-    iconUrl: './assets/image/astronaut.png',
-    iconSize: [60,60],
-    iconAnchor: [22,94],
-    popupAnchor: [-3,-76]
-
-});
-
+var updateMarker = function(newLat, newLng) {
+    var lmark = L.marker([10, 10],{icon:myIcon}).addTo(map)
+    lmark.setLatLng([newLat, newLng]);
+    map.panTo([newLat, newLng], animate = true);
+}
 
 var requestIssUrl = 'http://api.open-notify.org/iss-now.json';
 function issFetch() {
@@ -28,9 +34,13 @@ function issFetch() {
             var latCord = data.iss_position.latitude;
             var lonCord = data.iss_position.longitude;
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
-
+            var lmark = L.marker([latCord, lonCord],{icon:myIcon}).addTo(map)
+            updateMarker(latCord,lonCord)
         })
 }
+
+issFetch();
+
 
 setInterval(function () { $(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss")) },
     1000);
@@ -44,22 +54,6 @@ fetch(geoRequest)
         return response.json()
     })
     .then(function (data) {
-<<<<<<< HEAD
-         var satCords = document.querySelector(".cords");
-        var latCord = data.iss_position.latitude;
-        var lonCord = data.iss_position.longitude;
-        satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
-        var lmark = L.marker([latCord, lonCord],{icon: myIcon}).addTo(map)
-    })};
-issFetch();
-
-// cityLocation(latCord, lonCord);
-
-setInterval (function(){$(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss"))},
-         1000)
-setInterval(issFetch,5000)
-//  function cityLocation(lat, lon)
-=======
         console.log(data)
         cityLat = data.results[0].locations[0].displayLatLng.lat;
         cityLon = data.results[0].locations[0].displayLatLng.lng;
@@ -74,9 +68,8 @@ fetch(sunRequest)
 })
 .then(function(data){
     console.log(data)
-cityRise
+//cityRise
 })
->>>>>>> e6f05d11708251b44992868a265062c22bda1cbf
 
 var haversine = function (lat1, lon1, lat2, lon2) {
     var radius = 6371; //kilometers
