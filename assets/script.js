@@ -22,7 +22,7 @@ var updateMarker = function (newLat, newLng) {
 var latCord;
 var lonCord;
 
-var requestIssUrl = 'http://api.open-notify.org/iss-now.json';
+var requestIssUrl = 'https://api.wheretheiss.at/v1/satellites/25544';
 function issFetch() {
 
     fetch(requestIssUrl)
@@ -31,13 +31,13 @@ function issFetch() {
         })
         .then(function (data) {
             var satCords = document.querySelector(".cords");
-            latCord = Number(data.iss_position.latitude);
-            lonCord = Number(data.iss_position.longitude);
+            latCord = Number(data.latitude);
+            lonCord = Number(data.longitude);
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
             var locLat = document.querySelector('#lat')
             var locLon = document.querySelector('#lon')
-            locLat.textContent = latCord;
-            locLon.textContent = lonCord;
+            locLat.textContent = latCord.toFixed(2);
+            locLon.textContent = lonCord.toFixed(2);
             console.log(latCord,lonCord)
 
             if (!lmark) {
