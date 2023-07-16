@@ -34,6 +34,12 @@ function issFetch() {
             latCord = Number(data.iss_position.latitude);
             lonCord = Number(data.iss_position.longitude);
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
+            var locLat = document.querySelector('#lat')
+            var locLon = document.querySelector('#lon')
+            locLat.textContent = latCord;
+            locLon.textContent = lonCord;
+            console.log(latCord,lonCord)
+
             if (!lmark) {
                 lmark = L.marker([latCord, lonCord], { icon: myIcon }).addTo(map)
             }
@@ -42,7 +48,7 @@ function issFetch() {
             }
             //distanceCalc();
             updateMarker(latCord, lonCord)
-            sunRise(latCord,lonCord)
+            sunRise(latCord, lonCord)
         })
 }
 
@@ -69,31 +75,32 @@ fetch(geoRequest)
         cityLat = data.results[0].locations[0].displayLatLng.lat;
         cityLon = data.results[0].locations[0].displayLatLng.lng;
 
-    //  cityLocation(cityLat,cityLon)
-    
-     
-    
+        //  cityLocation(cityLat,cityLon)
+
+
+
     })
 
-function sunRise(latCord,lonCord) {
-    
+function sunRise(latCord, lonCord) {
 
-var sunRequest = "https://api.sunrise-sunset.org/json?lat="+latCord+"&lng="+lonCord+"&date=today"
-fetch(sunRequest)
-    .then(function (response) {
-        
-         
-        return response.json()
-    })
-    .then(function (data) {
-       console.log(data)
-        var issRise=document.querySelector(".sun-rise")
-        var issSet=document.querySelector(".sun-set")
-        
-        
-        issRise.textContent=data.results.sunrise;
-        issSet.textContent=data.results.sunset;
-    })}
+
+    var sunRequest = "https://api.sunrise-sunset.org/json?lat=" + latCord + "&lng=" + lonCord + "&date=today"
+    fetch(sunRequest)
+        .then(function (response) {
+
+
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data)
+            var issRise = document.querySelector(".sun-rise")
+            var issSet = document.querySelector(".sun-set")
+
+
+            issRise.textContent = data.results.sunrise;
+            issSet.textContent = data.results.sunset;
+        })
+}
 
 var haversine = function (lat1, lon1, lat2, lon2) {
     var radius = 6371; //kilometers
@@ -109,8 +116,8 @@ var haversine = function (lat1, lon1, lat2, lon2) {
     return distance
 }
 //Calculates the distance between the ISS and the user's input
-var distanceCalc = function() {
-    var distance = haversine(latCord,lonCord,cityLat,cityLon);
+var distanceCalc = function () {
+    var distance = haversine(latCord, lonCord, cityLat, cityLon);
     document.querySelector('#distance').textContent = distance.toFixed(2)
     console.log(distance);
 }
