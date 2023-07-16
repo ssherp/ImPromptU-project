@@ -42,6 +42,7 @@ function issFetch() {
             }
             //distanceCalc();
             updateMarker(latCord, lonCord)
+            sunRise(latCord,lonCord)
         })
 }
 
@@ -68,20 +69,31 @@ fetch(geoRequest)
         cityLat = data.results[0].locations[0].displayLatLng.lat;
         cityLon = data.results[0].locations[0].displayLatLng.lng;
 
-        // cityLocation(cityLat,cityLon)
-        console.log(cityLat, cityLon)
-
+    //  cityLocation(cityLat,cityLon)
+    
+     
+    
     })
 
-var sunRequest = "https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&date=today"
+function sunRise(latCord,lonCord) {
+    
+
+var sunRequest = "https://api.sunrise-sunset.org/json?lat="+latCord+"&lng="+lonCord+"&date=today"
 fetch(sunRequest)
     .then(function (response) {
+        
+         
         return response.json()
     })
     .then(function (data) {
-        console.log(data)
-        //cityRise
-    })
+       console.log(data)
+        var issRise=document.querySelector(".sun-rise")
+        var issSet=document.querySelector(".sun-set")
+        
+        
+        issRise.textContent=data.results.sunrise;
+        issSet.textContent=data.results.sunset;
+    })}
 
 var haversine = function (lat1, lon1, lat2, lon2) {
     var radius = 6371; //kilometers
