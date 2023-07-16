@@ -6,22 +6,21 @@ var myIcon = L.icon({
     iconSize: [60, 60]
 
 });
-
+//Creates map element onto the page
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 
-
-
-
 }).addTo(map);
-//var lmark = L.marker([10, 10],{icon:myIcon}).addTo(map)
-
+// Changes the marker's location everytime the ISS coordinates update
 var updateMarker = function (newLat, newLng) {
-    //var lmark = L.marker([10, 10],{icon:myIcon}).addTo(map)
+    
 
     lmark.setLatLng([newLat, newLng]);
     map.panTo([newLat, newLng], animate = true);
 }
+
+var latCord;
+var lonCord;
 
 var requestIssUrl = 'http://api.open-notify.org/iss-now.json';
 function issFetch() {
@@ -32,12 +31,16 @@ function issFetch() {
         })
         .then(function (data) {
             var satCords = document.querySelector(".cords");
-            var latCord = data.iss_position.latitude;
-            var lonCord = data.iss_position.longitude;
+            latCord = Number(data.iss_position.latitude);
+            lonCord = Number(data.iss_position.longitude);
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
             if (!lmark) {
                 lmark = L.marker([latCord, lonCord], { icon: myIcon }).addTo(map)
             }
+            if (cityLat && cityLon && latCord && lonCord) {
+                distanceCalc();
+            }
+            //distanceCalc();
             updateMarker(latCord, lonCord)
         })
 }
@@ -50,7 +53,11 @@ setInterval(function () { $(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss")
 setInterval(issFetch, 5000)
 
 // function getCity(){ //add search info city 
-var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=Washington&outFormat=json"
+
+var cityLat;
+var cityLon;
+
+var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=Fremont&outFormat=json"
 fetch(geoRequest)
     .then(function (response) {
 
@@ -63,6 +70,7 @@ fetch(geoRequest)
 
         // cityLocation(cityLat,cityLon)
         console.log(cityLat, cityLon)
+
     })
 var sunRequest = "https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&date=today"
 fetch(sunRequest)
@@ -85,6 +93,10 @@ var haversine = function (lat1, lon1, lat2, lon2) {
     var latDif = (lat2 - lat1) / 2;
     var abd = (Math.sin(latDif)) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(lonDif)) ** 2
     var distance = 2 * radius * Math.asin(Math.sqrt(abd));
-
+    return distance
+}
+//Calculates the distance between the ISS and the user's input
+var distanceCalc = function() {
+    var distance = haversine(latCord,lonCord,cityLat,cityLon);
     console.log(distance);
 }
