@@ -13,7 +13,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 // Changes the marker's location everytime the ISS coordinates update
 var updateMarker = function (newLat, newLng) {
-    
+
 
     lmark.setLatLng([newLat, newLng]);
     map.panTo([newLat, newLng], animate = true);
@@ -72,6 +72,7 @@ fetch(geoRequest)
         console.log(cityLat, cityLon)
 
     })
+
 var sunRequest = "https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&date=today"
 fetch(sunRequest)
     .then(function (response) {
@@ -98,5 +99,6 @@ var haversine = function (lat1, lon1, lat2, lon2) {
 //Calculates the distance between the ISS and the user's input
 var distanceCalc = function() {
     var distance = haversine(latCord,lonCord,cityLat,cityLon);
+    document.querySelector('#distance').textContent = distance.toFixed(2)
     console.log(distance);
 }
