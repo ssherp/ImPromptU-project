@@ -1,28 +1,26 @@
+var map = L.map('map').setView([0, 0], 3);
 
-var map = L.map('map').setView([51.505, -0.09], 2);
+var lmark;
+var myIcon = L.icon({
+        iconUrl: './assets/image/astronaut.png',
+        iconSize: [60, 60]
+        
+    });
+    
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
 
-
+    
+    
 
 }).addTo(map);
-var lmark = L.marker([10, 10]).addTo(map)
+//var lmark = L.marker([10, 10],{icon:myIcon}).addTo(map)
 
-function moveISS() {
-    $.getJSON('http://api.open-notify.org/iss-now.json?callback=?', function (data) {
-        var lat = data['iss_position']['latitude'];
-        var lon = data['iss_position']['longitude'];
-
-        // See leaflet docs for setting up icons and map layers
-        // The update to the map is done here:
-        iss.setLatLng([lat, lon]);
-        isscirc.setLatLng([lat, lon]);
-        map.panTo([lat, lon], animate = true);
-    });
-    setTimeout(moveISS, 5000);
+var updateMarker = function(newLat, newLng) {
+    var lmark = L.marker([10, 10],{icon:myIcon}).addTo(map)
+    lmark.setLatLng([newLat, newLng]);
+    map.panTo([newLat, newLng], animate = true);
 }
-
-
 
 var requestIssUrl = 'http://api.open-notify.org/iss-now.json';
 function issFetch() {
@@ -36,9 +34,13 @@ function issFetch() {
             var latCord = data.iss_position.latitude;
             var lonCord = data.iss_position.longitude;
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
-
+            var lmark = L.marker([latCord, lonCord],{icon:myIcon}).addTo(map)
+            updateMarker(latCord,lonCord)
         })
 }
+
+issFetch();
+
 
 setInterval(function () { $(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss")) },
     1000);
@@ -66,7 +68,7 @@ fetch(sunRequest)
 })
 .then(function(data){
     console.log(data)
-cityRise
+//cityRise
 })
 
 var haversine = function (lat1, lon1, lat2, lon2) {
