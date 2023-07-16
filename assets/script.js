@@ -26,39 +26,47 @@ function moveISS() {
 
 var requestIssUrl = 'http://api.open-notify.org/iss-now.json';
 function issFetch() {
-    
+
     fetch(requestIssUrl)
-    .then(function (response) {
-        return response.json();
-    })
-    .then(function (data) 
-    
-    {
-         var satCords = document.querySelector(".cords");
-        var latCord = data.iss_position.latitude;
-        var lonCord = data.iss_position.longitude;
-        satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            var satCords = document.querySelector(".cords");
+            var latCord = data.iss_position.latitude;
+            var lonCord = data.iss_position.longitude;
+            satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
 
-    })}
+        })
+}
 
-setInterval (function(){$(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss"))},
-         1000);
-setInterval(issFetch,5000)
+setInterval(function () { $(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss")) },
+    1000);
+setInterval(issFetch, 5000)
 
 // function getCity(){ //add search info city 
-var geoRequest ="https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=Washington&outFormat=json"
+var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=Washington&outFormat=json"
 fetch(geoRequest)
-    .then(function(response){
-       
+    .then(function (response) {
+
         return response.json()
     })
-.then(function(data){
-     console.log(data)
-    cityLat=data.results[0].locations[0].displayLatLng.lat;
-    cityLon=data.results[0].locations[0].displayLatLng.lng;
+    .then(function (data) {
+        console.log(data)
+        cityLat = data.results[0].locations[0].displayLatLng.lat;
+        cityLon = data.results[0].locations[0].displayLatLng.lng;
 
-// cityLocation(cityLat,cityLon)
-console.log(cityLat,cityLon)
+        // cityLocation(cityLat,cityLon)
+        console.log(cityLat, cityLon)
+    })
+var sunRequest="https://api.sunrise-sunset.org/json?lat=36.7201600&lng=-4.4203400&date=today"
+fetch(sunRequest)
+.then(function(response){
+    return response.json()
+})
+.then(function(data){
+    console.log(data)
+cityRise
 })
 
 var haversine = function (lat1, lon1, lat2, lon2) {
