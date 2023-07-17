@@ -45,6 +45,7 @@ function issFetch() {
             }
             if (cityLat && cityLon && latCord && lonCord) {
                 distanceCalc();
+                findDirection();
             }
             //distanceCalc();
             updateMarker(latCord, lonCord)
@@ -64,7 +65,7 @@ setInterval(issFetch, 5000)
 var cityLat;
 var cityLon;
 
-var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=Fremont&outFormat=json"
+var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=austin,tx,ca&outFormat=json"
 fetch(geoRequest)
     .then(function (response) {
 
@@ -74,12 +75,9 @@ fetch(geoRequest)
         console.log(data)
         cityLat = data.results[0].locations[0].displayLatLng.lat;
         cityLon = data.results[0].locations[0].displayLatLng.lng;
-
-        //  cityLocation(cityLat,cityLon)
-
-
-
-    })
+        distanceCalc();
+        findDirection();
+    });
 
 function sunRise(latCord, lonCord) {
 
@@ -108,7 +106,6 @@ var haversine = function (lat1, lon1, lat2, lon2) {
     lon1 *= Math.PI / 180;
     lat2 *= Math.PI / 180;
     lon2 *= Math.PI / 180;
-
     var lonDif = (lon2 - lon1) / 2;
     var latDif = (lat2 - lat1) / 2;
     var abd = (Math.sin(latDif)) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(lonDif)) ** 2
@@ -120,4 +117,19 @@ var distanceCalc = function () {
     var distance = haversine(latCord, lonCord, cityLat, cityLon);
     document.querySelector('#distance').textContent = distance.toFixed(2)
     console.log(distance);
-}
+};
+
+var findDirection = function() {
+    var direction = "";
+    if (latCord > cityLat) {
+        direction += "North ";
+    } else if (latCord < cityLat) {
+        direction += "South ";
+    }
+    if (lonCord > cityLon) {
+        direction += "West";
+    } else if (lonCord < cityLon) {
+        direction += "East";
+    }
+    console.log("Direction: " + direction);
+};
