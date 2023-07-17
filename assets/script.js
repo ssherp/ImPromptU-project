@@ -45,6 +45,7 @@ function issFetch() {
             }
             if (cityLat && cityLon && latCord && lonCord) {
                 distanceCalc();
+                findDirection();
             }
             //distanceCalc();
             updateMarker(latCord, lonCord)
@@ -127,7 +128,6 @@ var haversine = function (lat1, lon1, lat2, lon2) {
     lon1 *= Math.PI / 180;
     lat2 *= Math.PI / 180;
     lon2 *= Math.PI / 180;
-
     var lonDif = (lon2 - lon1) / 2;
     var latDif = (lat2 - lat1) / 2;
     var abd = (Math.sin(latDif)) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(lonDif)) ** 2
@@ -139,4 +139,19 @@ var distanceCalc = function () {
     var distance = haversine(latCord, lonCord, cityLat, cityLon);
     document.querySelector('#distance').textContent = distance.toFixed(2)
     console.log(distance);
-}
+};
+
+var findDirection = function() {
+    var direction = "";
+    if (latCord > cityLat) {
+        direction += "North ";
+    } else if (latCord < cityLat) {
+        direction += "South ";
+    }
+    if (lonCord > cityLon) {
+        direction += "West";
+    } else if (lonCord < cityLon) {
+        direction += "East";
+    }
+    console.log("Direction: " + direction);
+};
