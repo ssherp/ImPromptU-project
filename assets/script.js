@@ -112,16 +112,31 @@ var getCity = function (city) {
             lon: cityLon
         };
         searchHistory.push(searchEntry);
-
+// stores search history in local storage
         localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 };
-
+// created a function to display search history
 var displaySearchHistory = function () {
     var searchHistoryContainer = document.querySelector("#search-history");
     searchHistoryContainer.innerHTML = "";
-    
+    // adding a list item for each search history entry
     for (var i = 0; i < searchHistory.length; i++) {
-        var searchEntry
+        var searchEntry = searchHistory[i];
+        var cityName = searchEntry.city;
+// adding list items to search history
+        var listItem = document.createElement("li");
+        listItem.textContent = cityName;
+// adding event listener to search history list items
+        listItem.addEventListener("click", function () {
+            cityLat = searchEntry.lat;
+            cityLon = searchEntry.lon;
+            distanceCalc();
+            findDirection();
+        });
+        // this is where the list items are added to the page
+        searchHistoryContainer.appendChild(listItem);
+    }
+};
 
 
 function sunRise(latCord, lonCord) {
