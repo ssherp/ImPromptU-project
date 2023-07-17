@@ -38,7 +38,7 @@ function issFetch() {
             var locLon = document.querySelector('#lon')
             locLat.textContent = latCord.toFixed(2);
             locLon.textContent = lonCord.toFixed(2);
-            console.log(latCord,lonCord)
+            console.log(latCord, lonCord)
 
             if (!lmark) {
                 lmark = L.marker([latCord, lonCord], { icon: myIcon }).addTo(map)
@@ -64,23 +64,42 @@ setInterval(issFetch, 5000)
 var cityLat;
 var cityLon;
 
-var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=Fremont&outFormat=json"
-fetch(geoRequest)
-    .then(function (response) {
 
-        return response.json()
-    })
-    .then(function (data) {
-        console.log(data)
-        cityLat = data.results[0].locations[0].displayLatLng.lat;
-        cityLon = data.results[0].locations[0].displayLatLng.lng;
+var cityInput = document.querySelector('#user-city');
+var cityFormEl = document.querySelector('.city-form');
 
-        //  cityLocation(cityLat,cityLon)
+var citySubmit = function (event) {
+
+    event.preventDefault();
+    var city = cityInput.value.trim();
+    cityInput.value = "";
+    if (city) {
+        console.log(city);
+        getCity(city);
+    }
+};
+
+
+cityFormEl.addEventListener('submit', citySubmit);
+
+var getCity = function (city) {
+    var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=" + city + "&outFormat=json"
+    fetch(geoRequest)
+        .then(function (response) {
+
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data)
+            cityLat = data.results[0].locations[0].displayLatLng.lat;
+            cityLon = data.results[0].locations[0].displayLatLng.lng;
+
+            //  cityLocation(cityLat,cityLon)
 
 
 
-    })
-
+        })
+}
 function sunRise(latCord, lonCord) {
 
 

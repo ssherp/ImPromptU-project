@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
-  <link rel="stylesheet" href="./assets/style.css"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+  <link rel="stylesheet" href="./assets/style.css" />
   <title>WTS</title>
 </head>
+
 <body>
-  <header class ="hero is-medium is-link is-outlined">
+  <header class="hero is-medium is-link is-outlined">
     <h1>Where is the space ship?</h1>
     <p>locate the ISS.</p>
     <div class="time"></div>
@@ -79,47 +81,44 @@
               <p class="title">
                 Your Location
               </p>
-              <div class="field">
-                <label class="label">Your City</label>
-                <div class="control">
-                  <input class="input" type="text" placeholder="Type city name here" id="user-city">
-                </div>
+              <div class="field control">
+
+                <form class="city-form">
+                  <input class="input city-input" type="text" placeholder="Type city name here" id="user-city">
+                  <button class="button is-link" id="submit">Search</button>
+                </form>
               </div>
-              <div class="field">
-                <div class="control">
-                  <button class="button is-link" id="submit">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="card">
-            <div class="card-content">
-              <p class="title">
-                Distance
-              </p>
-              <p class="subtitle">
-                <span id="distance"></span> km
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="column">
-          <div class="card">
-            <div class="card-content">
-              <p class="title">Current Sunrise/Sunset Times at the ISS</p>
-              <p class="subtitle ">
-                Sunrise: <span class="sun-rise"></span>
-              </p>
-              <p class="subtitle ">
-                Sunset: <span class="sun-set"></span>
-              </p>
             </div>
           </div>
         </div>
       </div>
-      
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <p class="title">
+              Distance
+            </p>
+            <p class="subtitle">
+              <span id="distance"></span> km
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <p class="title">Current Sunrise/Sunset Times at the ISS</p>
+            <p class="subtitle ">
+              Sunrise: <span class="sun-rise"></span>
+            </p>
+            <p class="subtitle ">
+              Sunset: <span class="sun-set"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     </div>
     <div class="user-search-results">
       <button class="save-results button is success">Save Results</button>
@@ -136,4 +135,5 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="./assets/script.js"></script>
 </body>
+
 </html>
