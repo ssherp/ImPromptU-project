@@ -17,7 +17,7 @@ var updateMarker = function (newLat, newLng) {
 
     lmark.setLatLng([newLat, newLng]);
     map.panTo([newLat, newLng], animate = true);
-}
+};
 
 var latCord;
 var lonCord;
@@ -51,7 +51,7 @@ function issFetch() {
             updateMarker(latCord, lonCord)
             sunRise(latCord, lonCord)
         })
-}
+};
 
 issFetch();
 
@@ -77,11 +77,15 @@ var citySubmit = function (event) {
     if (city) {
         console.log(city);
         getCity(city);
+        loadSearchHistory();
     }
 };
 
 
 cityFormEl.addEventListener('submit', citySubmit);
+
+var searchHistory = []; 
+// array to store searched cities
 
 var getCity = function (city) {
     var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=" + city + "&outFormat=json"
@@ -100,14 +104,61 @@ var getCity = function (city) {
 
 
         })
-}
+// updating function to add city to search history
+// and update the search history list
+// this is done by updating the searchHistory array
+        var searchEntry = {
+            city: city,
+            lat: cityLat,
+            lon: cityLon
+        };
+        searchHistory.push(searchEntry);
+// stores search history in local storage
+        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+};
+// created a function to display search history
+var displaySearchHistory = function () {
+    var searchHistoryContainer = document.querySelector("#search-history");
+    searchHistoryContainer.innerHTML = "";
+    // adding a list item for each search history entry
+    for (var i = 0; i < searchHistory.length; i++) {
+        var searchEntry = searchHistory[i];
+        var cityName = searchEntry.city;
+// adding list items to search history
+        var listItem = document.createElement("li");
+        listItem.textContent = cityName;
+// adding event listener to search history list items
+        listItem.addEventListener("click", function () {
+            cityLat = searchEntry.lat;
+            cityLon = searchEntry.lon;
+            distanceCalc();
+            findDirection();
+        });
+        
+        // this is where the list items are added to the page
+        searchHistoryContainer.appendChild(listItem);
+    }
+};
+// below function loads search history from local storage
+var loadSearchHistory = function () {
+    var savedSearchHistory = localStorage.getItem("searchHistory");
+    if (savedSearchHistory) {
+        searchHistory = JSON.parse(savedSearchHistory);
+        // conditional to make sure search history is not empty
+    }
+    displaySearchHistory();
+};
+
+// added above so that search history is displayed on page load
+
+
 function sunRise(latCord, lonCord) {
 
-
+// function to get sunrise and sunset times
     var sunRequest = "https://api.sunrise-sunset.org/json?lat=" + latCord + "&lng=" + lonCord + "&date=today"
     fetch(sunRequest)
         .then(function (response) {
-
+// fetch request to get sunrise and sunset times
 
             return response.json()
         })
@@ -115,12 +166,12 @@ function sunRise(latCord, lonCord) {
             console.log(data)
             var issRise = document.querySelector(".sun-rise")
             var issSet = document.querySelector(".sun-set")
-
+// .then function to display sunrise and sunset times
 
             issRise.textContent = data.results.sunrise;
             issSet.textContent = data.results.sunset;
         })
-}
+};
 
 var haversine = function (lat1, lon1, lat2, lon2) {
     var radius = 6371; //kilometers
@@ -155,3 +206,7 @@ var findDirection = function() {
     }
     console.log("Direction: " + direction);
 };
+
+
+
+
