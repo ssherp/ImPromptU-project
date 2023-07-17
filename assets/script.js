@@ -77,6 +77,7 @@ var citySubmit = function (event) {
     if (city) {
         console.log(city);
         getCity(city);
+        loadSearchHistory();
     }
 };
 
@@ -133,19 +134,31 @@ var displaySearchHistory = function () {
             distanceCalc();
             findDirection();
         });
+        
         // this is where the list items are added to the page
         searchHistoryContainer.appendChild(listItem);
     }
 };
+// below function loads search history from local storage
+var loadSearchHistory = function () {
+    var savedSearchHistory = localStorage.getItem("searchHistory");
+    if (savedSearchHistory) {
+        searchHistory = JSON.parse(savedSearchHistory);
+        // conditional to make sure search history is not empty
+    }
+    displaySearchHistory();
+};
+
+// added above so that search history is displayed on page load
 
 
 function sunRise(latCord, lonCord) {
 
-
+// function to get sunrise and sunset times
     var sunRequest = "https://api.sunrise-sunset.org/json?lat=" + latCord + "&lng=" + lonCord + "&date=today"
     fetch(sunRequest)
         .then(function (response) {
-
+// fetch request to get sunrise and sunset times
 
             return response.json()
         })
@@ -153,7 +166,7 @@ function sunRise(latCord, lonCord) {
             console.log(data)
             var issRise = document.querySelector(".sun-rise")
             var issSet = document.querySelector(".sun-set")
-
+// .then function to display sunrise and sunset times
 
             issRise.textContent = data.results.sunrise;
             issSet.textContent = data.results.sunset;
