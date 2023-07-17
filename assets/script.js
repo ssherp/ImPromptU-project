@@ -22,7 +22,7 @@ var updateMarker = function (newLat, newLng) {
 var latCord;
 var lonCord;
 
-var requestIssUrl = 'http://api.open-notify.org/iss-now.json';
+var requestIssUrl = 'https://api.wheretheiss.at/v1/satellites/25544';
 function issFetch() {
 
     fetch(requestIssUrl)
@@ -31,14 +31,14 @@ function issFetch() {
         })
         .then(function (data) {
             var satCords = document.querySelector(".cords");
-            latCord = Number(data.iss_position.latitude);
-            lonCord = Number(data.iss_position.longitude);
+            latCord = Number(data.latitude);
+            lonCord = Number(data.longitude);
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
             var locLat = document.querySelector('#lat')
             var locLon = document.querySelector('#lon')
-            locLat.textContent = latCord;
-            locLon.textContent = lonCord;
-            console.log(latCord,lonCord)
+            locLat.textContent = latCord.toFixed(2);
+            locLon.textContent = lonCord.toFixed(2);
+            console.log(latCord, lonCord)
 
             if (!lmark) {
                 lmark = L.marker([latCord, lonCord], { icon: myIcon }).addTo(map)
@@ -65,20 +65,42 @@ setInterval(issFetch, 5000)
 var cityLat;
 var cityLon;
 
-var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=austin,tx,ca&outFormat=json"
-fetch(geoRequest)
-    .then(function (response) {
 
-        return response.json()
-    })
-    .then(function (data) {
-        console.log(data)
-        cityLat = data.results[0].locations[0].displayLatLng.lat;
-        cityLon = data.results[0].locations[0].displayLatLng.lng;
-        distanceCalc();
-        findDirection();
-    });
+var cityInput = document.querySelector('#user-city');
+var cityFormEl = document.querySelector('.city-form');
 
+var citySubmit = function (event) {
+
+    event.preventDefault();
+    var city = cityInput.value.trim();
+    cityInput.value = "";
+    if (city) {
+        console.log(city);
+        getCity(city);
+    }
+};
+
+
+cityFormEl.addEventListener('submit', citySubmit);
+
+var getCity = function (city) {
+    var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=" + city + "&outFormat=json"
+    fetch(geoRequest)
+        .then(function (response) {
+
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data)
+            cityLat = data.results[0].locations[0].displayLatLng.lat;
+            cityLon = data.results[0].locations[0].displayLatLng.lng;
+
+            //  cityLocation(cityLat,cityLon)
+
+
+
+        })
+}
 function sunRise(latCord, lonCord) {
 
 
