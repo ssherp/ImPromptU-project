@@ -15,3 +15,8 @@ header h1 {
 body {
     background-image: url(./image/wallpapersden.com_nebula_3840x2160.jpg);
 }
+
+#map {
+    height: 900px;
+    width: 1350px;
+}
