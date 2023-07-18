@@ -164,7 +164,7 @@ var loadSearchHistory = function () {
     }
     displaySearchHistory();
 };
-
+loadSearchHistory();
 // added above so that search history is displayed on page load
 
 
