@@ -70,19 +70,23 @@ setInterval(issFetch, 5000)
 var cityLat;
 var cityLon;
 
-
+// above variables are used to store the city coordinates
 var cityInput = document.querySelector('#user-city');
 var cityFormEl = document.querySelector('.city-form');
-
+// here the variables are used to select the city input and city form elements in the html using the class and id
 var citySubmit = function (event) {
 
     event.preventDefault();
     var city = cityInput.value.trim();
     cityInput.value = "";
+    // cityInput.value.trim() is used to remove any spaces from the city name
+    // cityInput.value = ""; is used to clear the city input field after the city name is submitted
+    // above variables are used to get the city name from the user input
     if (city) {
         console.log(city);
         getCity(city);
         loadSearchHistory();
+        // loadSearchHistory(); is placed here so that the search history is updated when a new city is searched
     }
 };
 
@@ -90,11 +94,14 @@ var citySubmit = function (event) {
 cityFormEl.addEventListener('submit', citySubmit);
 
 var searchHistory = []; 
-// array to store searched cities
+// array to store searched cities, the array will be populated by the search history items
+// the variable is placed outside of the function so that it can be accessed by the displaySearchHistory function (scope)
 
 var getCity = function (city) {
     var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=" + city + "&outFormat=json"
+    // above variable is used to get city coordinates by using the mapquest api
     fetch(geoRequest)
+    // the fetch request is used to get the city coordinates from the mapquest api
         .then(function (response) {
 
             return response.json()
@@ -103,7 +110,7 @@ var getCity = function (city) {
             console.log(data)
             cityLat = data.results[0].locations[0].displayLatLng.lat;
             cityLon = data.results[0].locations[0].displayLatLng.lng;
-
+// above function is used to get city coordinates
             //  cityLocation(cityLat,cityLon)
 
 
@@ -184,15 +191,19 @@ function sunRise(latCord, lonCord) {
 
 var haversine = function (lat1, lon1, lat2, lon2) {
     var radius = 6371; //kilometers
+    // above is the radius of the earth
     lat1 *= Math.PI / 180;
     lon1 *= Math.PI / 180;
     lat2 *= Math.PI / 180;
     lon2 *= Math.PI / 180;
+    // above the coordinates are converted to radians
     var lonDif = (lon2 - lon1) / 2;
     var latDif = (lat2 - lat1) / 2;
+    // above the difference between the coordinates is calculated
     var abd = (Math.sin(latDif)) ** 2 + Math.cos(lat1) * Math.cos(lat2) * (Math.sin(lonDif)) ** 2
     var distance = 2 * radius * Math.asin(Math.sqrt(abd));
     return distance
+    // above the distance is calculated using the haversine formula and the result is returned
 }
 //Calculates the distance between the ISS and the user's input
 var distanceCalc = function () {
@@ -203,17 +214,21 @@ var distanceCalc = function () {
 
 var findDirection = function() {
     var direction = "";
+    // above variable is used to store the direction
     if (latCord > cityLat) {
         direction += "North ";
     } else if (latCord < cityLat) {
         direction += "South ";
     }
+    // above if statement checks if the ISS is north or south of the city
     if (lonCord > cityLon) {
         direction += "West";
     } else if (lonCord < cityLon) {
         direction += "East";
     }
+    // above if statement checks if the ISS is east or west of the city
     console.log("Direction: " + direction);
+    // the direction is logged to the console
 };
 
 
