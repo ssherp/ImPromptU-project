@@ -224,7 +224,7 @@ var findDirection = function() {
     if (lonCord > cityLon) {
         direction += "East";
     } else if (lonCord < cityLon) {
-        direction += "Wast";
+        direction += "West";
     }
     // above if statement checks if the ISS is east or west of the city
     console.log("Direction: " + direction);
