@@ -11,32 +11,46 @@
 </head>
 
 <body>
-  <header class="hero is-medium is-link is-outlined">
-    <h1>Where is the space ship?</h1>
+  <header class="has-background-dark has-text-white">
+    <h1>SkyFinder</h1>
     <p>locate the ISS.</p>
     <div class="time"></div>
     <div class="cords"></div>
   </header>
-
   <main>
-    <article>
-      <p>Welcome to W.T.S where's the spaceship is an
-        interactive webpage where you can find the current
-        location of the international space station, you can
-        view the longitude and latitude real time and also
-        the corresponding location on the ground, in
-        addition to that you can see what time the sun will
-        rise and set. Check down below to input your
-        current location and see how far you are away from
-        the ISS’s current ground location</p>
-    </article>
-    <div id="map"></div>
+    <div class="container">
+      <div id="about-info" class="has-background-dark has-text-white">
+        <div class="columns">
+          <div class="column" id="about-box">
+            <div class="content">
+              <h2 id="about-header" class="title is-2">About Skyfinder</h2>
+              <p>Welcome to Skyfinder; An
+                interactive webpage where you can find the current
+                location of the international space station, you can
+                view the longitude and latitude real time and also
+                the altitude and speed the ISS is traveling at, in
+                addition to that you can see what time the sun will
+                rise and set. Check down below to input your
+                current location and see how far you are away from
+                the ISS current ground location.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="columns">
+        <div class="column">
+          <div id="map" class="card"></div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="columns">
         <div class="column">
           <div class="card">
             <div class="card-content">
-              <p class="title">
+              <p class="title is-2">
                 ISS Location
               </p>
               <p class="subtitle">
@@ -46,9 +60,9 @@
           </div>
         </div>
         <div class="column">
-          <div class="card">
+          <div class="card ">
             <div class="card-content">
-              <p class="title">
+              <p class="title is-2">
                 ISS Speed
               </p>
               <p class="subtitle">
@@ -58,7 +72,7 @@
           </div>
         </div>
         <div class="column">
-          <div class="card">
+          <div class="card is-link">
             <div class="card-content">
               <p class="title">
                 ISS Altitude
@@ -120,8 +134,16 @@
     </div>
 
     </div>
-  <h2>Search History:</h2>
-  <ul id="search-history" class="container"></ul>
+    <div class="container is-max-widescreen">
+      <div class="columns">
+        <div class="column">
+          <div>
+            <h2 id="historyHeader" class="title is-2 has-background-dark">Search History:</h2>
+            <ul id="search-history" class="has-background-dark"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
   <div id="map"></div>
   <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
