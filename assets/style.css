@@ -1,11 +1,17 @@
 #map { height: 500px; }
 
 header {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 header h1 {
     font-size: 36px;
     font-weight: 500;
-    margin: 10px 0;
+    margin-left: 200px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+body {
+    background-image: url(./image/wallpapersden.com_nebula_3840x2160.jpg);
 }
