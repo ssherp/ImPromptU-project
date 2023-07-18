@@ -202,7 +202,7 @@ var findDirection = function() {
     if (lonCord > cityLon) {
         direction += "East";
     } else if (lonCord < cityLon) {
-        direction += "Wast";
+        direction += "West";
     }
     console.log("Direction:" + direction);
 };
