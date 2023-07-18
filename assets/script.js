@@ -28,14 +28,19 @@ function issFetch() {
     fetch(requestIssUrl)
         .then(function (response) {
             return response.json();
+            // above function is used to get ISS coordinates
         })
         .then(function (data) {
             var satCords = document.querySelector(".cords");
+            // above variable is used to display ISS coordinates by selecting the class in the html
             latCord = Number(data.latitude);
             lonCord = Number(data.longitude);
+            // above variables are used to store the ISS coordinates by converting them to numbers
             satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
+            // satCords is used to display the ISS coordinates on the page
             var locLat = document.querySelector('#lat')
             var locLon = document.querySelector('#lon')
+            // above variables select the latitude and longitude elements in the html
             locLat.textContent = latCord.toFixed(2);
             locLon.textContent = lonCord.toFixed(2);
             console.log(latCord, lonCord)
@@ -122,7 +127,9 @@ var displaySearchHistory = function () {
     searchHistoryContainer.innerHTML = "";
     // adding a list item for each search history entry
     for (var i = 0; i < searchHistory.length; i++) {
+        // variable below is the current search history entry
         var searchEntry = searchHistory[i];
+        // variable below is the city name
         var cityName = searchEntry.city;
 // adding list items to search history
         var listItem = document.createElement("li");
@@ -131,6 +138,8 @@ var displaySearchHistory = function () {
         listItem.addEventListener("click", function () {
             cityLat = searchEntry.lat;
             cityLon = searchEntry.lon;
+            // above function to get city coordinates
+            // below function to get distance and direction
             distanceCalc();
             findDirection();
         });
