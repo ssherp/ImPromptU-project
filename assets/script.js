@@ -127,10 +127,10 @@ var displaySearchHistory = function () {
         var listItem = document.createElement("li");
         listItem.textContent = cityName;
         // adding event listener to search history list items
-    };
-    // this is where the list items are added to the page
-    searchHistoryContainer.appendChild(listItem);
+        searchHistoryContainer.appendChild(listItem)
 }
+    // this is where the list items are added to the page
+    }
 // below function loads search history from local storage
 var loadSearchHistory = function () {
     var savedSearchHistory = localStorage.getItem("searchHistory");
