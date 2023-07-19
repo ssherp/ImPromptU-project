@@ -5,6 +5,9 @@
 Sky Finder is an interactive web application that allows users to track the current location of the International Space Station (ISS) in real-time. The application displays the longitude and latitude of the ISS, its speed, altitude, and the corresponding location on the ground. Additionally, users can input their current location to calculate the distance between their location and the ISS's current ground position. The application also provides information about the sunrise and sunset times at the ISS's location.
 <br>[visit the Deployed site](https://ssherp.github.io/SkyFinder-project/)
 
+## User Stories
+![User Stories](./assets/image/userstories.png)
+
 ## Features
 
 *	Real-time tracking of the ISS's location on a map.
@@ -38,7 +41,7 @@ Sky Finder is an interactive web application that allows users to track the curr
 ## Contributors:
 
 ### Timothy Su
-* [[Portfolio](https://timothysu1.github.io/portfolio-timothysu/)
+* [Portfolio](https://timothysu1.github.io/portfolio-timothysu/)
 * [LinkedIn](https://www.linkedin.com/in/timothysu1/)
 ### Sonam Sherpa
 * [Portfolio](htps://ssherp.github.io/portfolio/)
