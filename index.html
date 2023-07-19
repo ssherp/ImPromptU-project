@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
   <link rel="stylesheet" href="./assets/style.css" />
-  <title>WTS</title>
+  <title>SkyFinder</title>
 </head>
 
 <body>
@@ -23,8 +23,8 @@
         <div class="columns">
           <div class="column" id="about-box">
             <div class="content">
-              <h2 id="about-header" class="title is-2">About Skyfinder</h2>
-              <p>Welcome to Skyfinder; An
+              <h2 id="about-header" class="title is-2">About SkyFinder</h2>
+              <p>Welcome to SkyFinder; An
                 interactive webpage where you can find the current
                 location of the international space station, you can
                 view the longitude and latitude real time and also
@@ -89,14 +89,14 @@
   <section class="user-input">
     <div class="container">
       <div class="columns">
-        <div class="column">
+        <div class="column is-half">
           <div class="card has-background-grey">
-            <div class="card-content">
+            <div class="card-content" style="height:325px">
               <p class="title has-text-white">
                 Your Location
               </p>
               <div class="field control">
-                  <form class="city-form">
+                <form class="city-form">
                   <input class="input city-input " type="text" placeholder="Type city name here" id="user-city">
                   <button class="button is-success" id="submit">Search</button>
                 </form>
@@ -104,34 +104,33 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="column">
-        <div class="card has-background-dark">
-          <div class="card-content">
-            <p class="title has-text-white">
-              Location distance from ISS:
-            </p>
-            <p class="subtitle has-text-white">
-              <span id="distance"></span> km
-            </p>
+        <div class="column is-half">
+          <div class="card has-background-dark">
+            <div class="card-content">
+              <p class="title has-text-white">
+                Location distance from ISS:
+              </p>
+              <p class="subtitle has-text-white">
+                <span id="distance"></span> km
+              </p>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="card has-background-dark">
-          <div class="card-content">
-            <p class="title has-text-white">Current Sunrise/Sunset Times at the ISS</p>
-            <p class="subtitle has-text-white">
-              Sunrise: <span class="sun-rise"></span>
-            </p>
-            <p class="subtitle has-text-white">
-              Sunset: <span class="sun-set"></span>
-            </p>
+          <div class="column">
+            <div class="card has-background-dark">
+              <div class="card-content">
+                <p class="title has-text-white">Current Sunrise/Sunset Times at the ISS</p>
+                <p class="subtitle has-text-white">
+                  Sunrise: <span class="sun-rise"></span>
+                </p>
+                <p class="subtitle has-text-white">
+                  Sunset: <span class="sun-set"></span>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     </div>
     <div class="container is-max-widescreen">
       <div class="columns">

@@ -1,8 +1,10 @@
-#map { height: 500px; }
+#map {
+    height: 500px;
+}
 
 header {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    display: inline-flex;
+    display: flex;
     width: 100%;
 }
 
@@ -21,14 +23,14 @@ header p {
     font-weight: bold;
 }
 
-header .time{
+header .time {
     margin-left: 200px;
     margin-top: 20px;
     font-size: 20px;
     font-weight: bold;
 }
 
-header .cords{
+header .cords {
     margin-left: 200px;
     margin-top: 20px;
     font-size: 20px;
@@ -50,7 +52,7 @@ body {
     font-size: 20px;
     font-weight: bold;
     color: white;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border: 5px solid white;
     padding: 10px;
     border-radius: 10px;
@@ -63,21 +65,17 @@ body {
     font-size: 40px;
     font-weight: bold;
     color: white;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border: 5px solid white;
     padding: 10px;
     border-radius: 10px;
 }
 
 #about-info {
-    margin-left: 200px;
-    margin-top: 20px;
-    font-size: 20px;
-    font-weight: bold;
     color: white;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border: 5px solid white;
-    padding: 10px;
+
     border-radius: 10px;
     line-height: 1.5;
     margin-bottom: 50px;
@@ -85,25 +83,33 @@ body {
 }
 
 #about-info p {
-    font-size: 28px;
+    font-size: 20px;
 }
 
 #about-header {
-    margin-left: 200px;
-    margin-top: 20px;
+    text-align: center;
     font-size: 40px;
     font-weight: bold;
     color: white;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    padding: 10px;
-    border-radius: 10px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 #about-box {
-    width:100%;
-    padding: 60px;
+    padding: 30px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    line-height: 1.75;
-
 }
 
+@media screen and (max-width:768px) {
+    header {
+        display: block;
+        font-size: medium;
+    }
+   header h1,header p,header .time,header .cords{
+        margin: 0
+    }
+    #fix{
+        display: block;
+        margin-bottom: 100px ;
+    }
+
+}
