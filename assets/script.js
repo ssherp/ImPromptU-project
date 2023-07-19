@@ -212,6 +212,10 @@ var distanceCalc = function () {
     console.log(distance);
 };
 
+
+var cityMarker;
+var neswPoint = "";
+
 var findDirection = function() {
     var direction = "";
     // above variable is used to store the direction
@@ -230,7 +234,18 @@ var findDirection = function() {
     console.log("Direction: " + direction);
     // the direction is logged to the console
 
+    neswPoint=direction
+
+
+      if (cityMarker) {
+        map.removeLayer(cityMarker);
+    }
+
+    cityMarker = L.marker([cityLat, cityLon])
+        .bindTooltip(neswPoint, { permanent: true, direction: 'center' })
+        .addTo(map);
 };
+
 
 
 
