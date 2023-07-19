@@ -29,9 +29,10 @@ Sky Finder is an interactive web application that allows users to track the curr
 7.	The search history will be displayed below the input section, showing previously searched city names. Clicking on a city name will recalculate the distance and update the display.
 
 ![SkyFinder site screenshot](./assets/image/screencapture-SkyFinder.png)
+
 ## Technologies Used
 
-*   HTML
+* HTML
 *	CSS (Bulma framework)
 *	JavaScript
 *	Leaflet.js (JavaScript library for interactive maps)
@@ -51,7 +52,7 @@ Sky Finder is an interactive web application that allows users to track the curr
 * [LinkedIn](https://www.linkedin.com/in/samuel-thomas-b82614183/)
 
 
-## credits:
+## Credits:
 
 *	Leaflet.js: https://leafletjs.com/
 *	Bulma CSS Framework: https://bulma.io/
@@ -60,11 +61,11 @@ Sky Finder is an interactive web application that allows users to track the curr
 *	Where The ISS At? API: https://wheretheiss.at/
 *	MapQuest Geocoding API: https://www.mapquestapi.com/geocoding/
 *	Sunrise-Sunset API: https://sunrise-sunset.org/api
-*   astronaut-image: https://www.flaticon.com/free-icon/astronaut_2026502?related_id=2026523&origin=search
-*   Haversine Formula: https://en.wikipedia.org/wiki/Haversine_formula
+* astronaut-image: https://www.flaticon.com/free-icon/astronaut_2026502?related_id=2026523&origin=search
+* Haversine Formula: https://en.wikipedia.org/wiki/Haversine_formula
 
 
-## learning Point:
+## Learning Point:
 
 One of the key learning points from this project is the integration of APIs to fetch real-time data. The project demonstrates how to make API requests using `fetch()` to obtain the ISS coordinates, sunrise and sunset times, and geolocation data. It highlights the importance of handling asynchronous operations and utilizing promises to handle API responses.
 
@@ -80,3 +81,47 @@ One of the key learning points from this project is the integration of APIs to f
 5.	Version Control: GitHub served as a reliable version control system throughout the project. It allowed us to track changes, revert to previous versions if needed, and maintain a comprehensive project history. We learned the importance of committing changes frequently and writing meaningful commit messages.
 
 <br>Overall, working as a group and utilizing GitHub for collaboration provided us with valuable experience in collaborative software development, effective communication, version control, and code organization. These skills are essential for successful teamwork and are widely applicable in professional software development environments.
+
+## Code Snippet
+```js
+var requestIssUrl = 'https://api.wheretheiss.at/v1/satellites/25544';
+function issFetch() {
+
+    fetch(requestIssUrl)
+        .then(function (response) {
+            return response.json();
+            // above function is used to get ISS coordinates
+        })
+        .then(function (data) {
+            var satCords = document.querySelector(".cords");
+            // above variable is used to display ISS coordinates by selecting the class in the html
+            latCord = Number(data.latitude);
+            lonCord = Number(data.longitude);
+            // above variables are used to store the ISS coordinates by converting them to numbers
+            satCords.textContent = "Latitude: " + latCord + " / Longitude: " + lonCord;
+            // satCords is used to display the ISS coordinates on the page
+            var locLat = document.querySelector('#lat')
+            var locLon = document.querySelector('#lon')
+            // above variables select the latitude and longitude elements in the html
+            locLat.textContent = latCord.toFixed(2);
+            locLon.textContent = lonCord.toFixed(2);
+            console.log(latCord, lonCord)
+
+            if (!lmark) {
+                lmark = L.marker([latCord, lonCord], { icon: myIcon }).addTo(map)
+            }
+            if (cityLat && cityLon && latCord && lonCord) {
+                distanceCalc();
+                findDirection();
+            }
+            //distanceCalc();
+            updateMarker(latCord, lonCord)
+            sunRise(latCord, lonCord)
+        })
+};
+```
+This portion of code sends a request to the API that tracks the ISS and processes the information received
+
+## Our site on different screen sizes:
+
+![Skyfinder Mobile](./assets/image/SkyFinder.gif)
