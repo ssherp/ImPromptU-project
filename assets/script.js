@@ -1,10 +1,8 @@
 var map = L.map('map').setView([0, 0], 3);
-
 var lmark;
 var myIcon = L.icon({
     iconUrl: './assets/image/astronaut.png',
     iconSize: [60, 60]
-
 });
 //Creates map element onto the page
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -18,7 +16,6 @@ var updateMarker = function (newLat, newLng) {
     lmark.setLatLng([newLat, newLng]);
     map.panTo([newLat, newLng], animate = true);
 };
-
 var latCord;
 var lonCord;
 
@@ -57,19 +54,13 @@ function issFetch() {
             sunRise(latCord, lonCord)
         })
 };
-
 issFetch();
-
-
 setInterval(function () { $(".time").text(dayjs().format("MMM DD YYYY  H:mm:ss")) },
     1000);
 setInterval(issFetch, 5000)
-
 // function getCity(){ //add search info city 
-
 var cityLat;
 var cityLon;
-
 // above variables are used to store the city coordinates
 var cityInput = document.querySelector('#user-city');
 var cityFormEl = document.querySelector('.city-form');
@@ -89,19 +80,16 @@ var citySubmit = function (event) {
         // loadSearchHistory(); is placed here so that the search history is updated when a new city is searched
     }
 };
-
-
 cityFormEl.addEventListener('submit', citySubmit);
 
-var searchHistory = []; 
+var searchHistory = [];
 // array to store searched cities, the array will be populated by the search history items
 // the variable is placed outside of the function so that it can be accessed by the displaySearchHistory function (scope)
-
 var getCity = function (city) {
     var geoRequest = "https://www.mapquestapi.com/geocoding/v1/address?key=xA9mxXLhrWpVTjmbArNX6dzhxdpac5jF&location=" + city + "&outFormat=json"
     // above variable is used to get city coordinates by using the mapquest api
     fetch(geoRequest)
-    // the fetch request is used to get the city coordinates from the mapquest api
+        // the fetch request is used to get the city coordinates from the mapquest api
         .then(function (response) {
 
             return response.json()
@@ -110,23 +98,20 @@ var getCity = function (city) {
             console.log(data)
             cityLat = data.results[0].locations[0].displayLatLng.lat;
             cityLon = data.results[0].locations[0].displayLatLng.lng;
-// above function is used to get city coordinates
+            // above function is used to get city coordinates
             //  cityLocation(cityLat,cityLon)
-
-
-
         })
-// updating function to add city to search history
-// and update the search history list
-// this is done by updating the searchHistory array
-        var searchEntry = {
-            city: city,
-            lat: cityLat,
-            lon: cityLon
-        };
-        searchHistory.push(searchEntry);
-// stores search history in local storage
-        localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+    // updating function to add city to search history
+    // and update the search history list
+    // this is done by updating the searchHistory array
+    var searchEntry = {
+        city: city,
+        lat: cityLat,
+        lon: cityLon
+    };
+    searchHistory.push(searchEntry);
+    // stores search history in local storage
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 };
 // created a function to display search history
 var displaySearchHistory = function () {
@@ -138,23 +123,14 @@ var displaySearchHistory = function () {
         var searchEntry = searchHistory[i];
         // variable below is the city name
         var cityName = searchEntry.city;
-// adding list items to search history
+        // adding list items to search history
         var listItem = document.createElement("li");
         listItem.textContent = cityName;
-// adding event listener to search history list items
-        listItem.addEventListener("click", function () {
-            cityLat = searchEntry.lat;
-            cityLon = searchEntry.lon;
-            // above function to get city coordinates
-            // below function to get distance and direction
-            distanceCalc();
-            findDirection();
-        });
-        
-        // this is where the list items are added to the page
-        searchHistoryContainer.appendChild(listItem);
-    }
-};
+        // adding event listener to search history list items
+    };
+    // this is where the list items are added to the page
+    searchHistoryContainer.appendChild(listItem);
+}
 // below function loads search history from local storage
 var loadSearchHistory = function () {
     var savedSearchHistory = localStorage.getItem("searchHistory");
@@ -166,15 +142,12 @@ var loadSearchHistory = function () {
 };
 loadSearchHistory();
 // added above so that search history is displayed on page load
-
-
 function sunRise(latCord, lonCord) {
-
-// function to get sunrise and sunset times
+    // function to get sunrise and sunset times
     var sunRequest = "https://api.sunrise-sunset.org/json?lat=" + latCord + "&lng=" + lonCord + "&date=today"
     fetch(sunRequest)
         .then(function (response) {
-// fetch request to get sunrise and sunset times
+            // fetch request to get sunrise and sunset times
 
             return response.json()
         })
@@ -182,13 +155,12 @@ function sunRise(latCord, lonCord) {
             console.log(data)
             var issRise = document.querySelector(".sun-rise")
             var issSet = document.querySelector(".sun-set")
-// .then function to display sunrise and sunset times
+            // .then function to display sunrise and sunset times
 
             issRise.textContent = data.results.sunrise;
             issSet.textContent = data.results.sunset;
         })
 };
-
 var haversine = function (lat1, lon1, lat2, lon2) {
     var radius = 6371; //kilometers
     // above is the radius of the earth
@@ -212,11 +184,11 @@ var distanceCalc = function () {
     console.log(distance);
 };
 
-
 var cityMarker;
 var neswPoint = "";
 
 var findDirection = function() {
+
     var direction = "";
     // above variable is used to store the direction
     if (latCord > cityLat) {
