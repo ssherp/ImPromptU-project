@@ -183,7 +183,12 @@ var distanceCalc = function () {
     document.querySelector('#distance').textContent = distance.toFixed(2)
     console.log(distance);
 };
-var findDirection = function () {
+
+var cityMarker;
+var neswPoint = "";
+
+var findDirection = function() {
+
     var direction = "";
     // above variable is used to store the direction
     if (latCord > cityLat) {
@@ -200,7 +205,19 @@ var findDirection = function () {
     // above if statement checks if the ISS is east or west of the city
     console.log("Direction: " + direction);
     // the direction is logged to the console
+
+    neswPoint=direction
+
+
+      if (cityMarker) {
+        map.removeLayer(cityMarker);
+    }
+
+    cityMarker = L.marker([cityLat, cityLon])
+        .bindTooltip(neswPoint, { permanent: true, direction: 'center' })
+        .addTo(map);
 };
+
 
 
 
