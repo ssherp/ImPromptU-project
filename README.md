@@ -17,6 +17,7 @@ Sky Finder is an interactive web application that allows users to track the curr
 *	Display of sunrise and sunset times at the ISS's location.
 *	Search history functionality to store and display previously searched locations.
 
+![SkyFinder site screenshot](./assets/image/screencapture-SkyFinder.png)
 
 ## Usage
 
@@ -28,7 +29,7 @@ Sky Finder is an interactive web application that allows users to track the curr
 6.	The sunrise and sunset times at the ISS's location will be shown in the "Current Sunrise/Sunset Times at the ISS" card.
 7.	The search history will be displayed below the input section, showing previously searched city names. Clicking on a city name will recalculate the distance and update the display.
 
-![SkyFinder site screenshot](./assets/image/screencapture-SkyFinder.png)
+![SkyFinder site gif](./assets/image/SkyFinder%20(1).gif)
 
 ## Technologies Used
 
